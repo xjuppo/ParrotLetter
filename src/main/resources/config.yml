@@ -1,0 +1,35 @@
+
+
+text:
+# In this section you can decide all the messages displayed by the delivery parrot in each state
+# Format:
+# %p = Parrot Name
+# %r = Receiver Name
+# %s = Player Name
+# Example: "%p > %r, An item was sent to you by %s"
+# ColorCodes can also be used
+
+  # First encounter with the parrot
+  hello_message: "Hello %s, what will I be delivering?"
+
+  # The player run out of time to give the item to the parrot
+  time_expired_message: "%p > Guess you don't have anything to deliver, I will be going, bye!"
+
+  # The item to deliver is received by the parrot
+  item_got_message: "%p > Thanks, I will deliver this item right now"
+
+  # The parrot starts delivering the item to the designated player
+  delivery_start_message: "%p > Hi %r, I have something for you from %s"
+
+  # The parrot has delivered the item to the designated player
+  delivery_done_message: "%p > I've done my job, I will be going now, bye!"
+
+# In this section you can add and remove the names that will be assigned randomly to a parrot
+
+parrot_names: [Joe, John, Jerome, Mike, Oliver]
+
+# If you want to add a cost for calling a parrot enable use_call_item and specificy an item
+
+call_item: minecraft:diamond
+call_item_amount: 1
+use_call_item: true

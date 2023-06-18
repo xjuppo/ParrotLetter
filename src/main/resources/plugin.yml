@@ -1,0 +1,11 @@
+name: ParrotLetter
+version: '${project.version}'
+main: me.xjuppo.parrotletter.ParrotLetter
+api-version: 1.19
+
+commands:
+  parrotletter:
+    usage: /parrotletter <subcommand>
+    aliases: [ pm ]
+    permission: parrotletter.*
+    description: Base command
