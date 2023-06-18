@@ -27,7 +27,6 @@ public class ParrotConfigMessage {
             messages.put(parrotMessage, plugin.getConfig().getString(String.format("text.%s", parrotMessage.name().toLowerCase())));
 
         }
-        Bukkit.getLogger().log(Level.INFO, plugin.getConfig().getStringList("parrot_names").toString());
         parrotNames = plugin.getConfig().getStringList("parrot_names");
     }
 

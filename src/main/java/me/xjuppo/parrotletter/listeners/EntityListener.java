@@ -47,7 +47,6 @@ public class EntityListener implements Listener {
             }
             event.getPlayer().getInventory().removeItem(itemClicked);
             parrotCarrier.toSend = itemClicked;
-            Bukkit.getLogger().log(Level.INFO, itemClicked.getType().name());
         }
     }
 }

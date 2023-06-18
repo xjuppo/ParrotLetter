@@ -1,5 +1,4 @@
 
-
 text:
 # In this section you can decide all the messages displayed by the delivery parrot in each state
 # Format:
@@ -32,4 +31,10 @@ parrot_names: [Joe, John, Jerome, Mike, Oliver]
 
 call_item: minecraft:diamond
 call_item_amount: 1
-use_call_item: true
+use_call_item: false
+
+# Commands permissions:
+# parrotletter.* | Access to base command
+# parrotletter.send | Access to send message
+# parrotletter.send.self | Ability to send an item to themselves
+# parrotletter.help | Access to the help command
