@@ -1,7 +1,7 @@
 name: ParrotLetter
 version: '${project.version}'
 main: me.xjuppo.parrotletter.ParrotLetter
-api-version: 1.18
+api-version: 1.17
 
 commands:
   parrotletter:
