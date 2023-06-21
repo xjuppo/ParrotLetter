@@ -89,6 +89,10 @@ public class CommandManager implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String label, String[] args) {
 
+        if (args.length == 0) {
+            return false;
+        }
+
         List<String> subCommandArgs = Arrays.asList(args).subList(1, args.length);
 
         if (!this.subCommands.keySet().contains(args[0])) {

@@ -1,12 +1,14 @@
 package me.xjuppo.parrotletter.parrot.tasks;
 
 import jdk.tools.jlink.plugin.Plugin;
+import me.xjuppo.parrotletter.ParrotLetter;
 import me.xjuppo.parrotletter.parrot.ParrotCarrier;
 import me.xjuppo.parrotletter.parrot.ParrotState;
 import me.xjuppo.parrotletter.parrot.ParrotTask;
 import org.bukkit.Bukkit;
 import org.bukkit.EntityEffect;
 import org.bukkit.entity.Parrot;
+import org.bukkit.scheduler.BukkitTask;
 import org.bukkit.util.Vector;
 
 import java.util.concurrent.TimeUnit;
@@ -21,10 +23,14 @@ public class FlyingAwayTask extends ParrotTask {
 
         Parrot parrot = (Parrot) parrotCarrier.getEntity();
 
-        parrot.setAI(true);
-        parrot.setAware(false);
-        parrot.setSitting(false);
-        parrot.setGliding(true);
+
+        Bukkit.getScheduler().runTask(ParrotLetter.plugin, () -> {
+            parrot.setSitting(false);
+            parrot.setGliding(true);
+            parrot.setAI(true);
+            parrot.setAware(false);
+        });
+
 
         Vector vector = new Vector();
         vector.setY(0.1f);
@@ -32,9 +38,7 @@ public class FlyingAwayTask extends ParrotTask {
         vector.setX(Math.cos(randomFloat*2*Math.PI)*this.horizontalSpeed);
         vector.setZ(Math.sin(randomFloat*2*Math.PI)*this.horizontalSpeed);
 
-        long end = System.currentTimeMillis() + 3000;
-
-        while (System.currentTimeMillis() < end) {
+        BukkitTask task = Bukkit.getScheduler().runTaskTimer(ParrotLetter.plugin, () -> {
             if (parrotCarrier.toSend == null) {
                 parrot.setRotation(-parrotCarrier.getReceiver().getLocation().getYaw(), parrotCarrier.getReceiver().getLocation().getPitch());
             }
@@ -42,9 +46,20 @@ public class FlyingAwayTask extends ParrotTask {
                 parrot.setRotation(parrotCarrier.getPlayer().getLocation().getYaw(), parrotCarrier.getPlayer().getLocation().getPitch());
             }
             parrot.setVelocity(vector);
+        }, 1L, 1L);
+
+        try {
+            TimeUnit.MILLISECONDS.sleep(3000);
+        }
+        catch (Exception e) {
+            Bukkit.getLogger().log(Level.INFO, e.toString());
         }
 
-        parrot.playEffect(EntityEffect.ENTITY_POOF);
+        task.cancel();
+
+        Bukkit.getScheduler().runTask(ParrotLetter.plugin, () -> {
+            parrot.playEffect(EntityEffect.ENTITY_POOF);
+        });
 
         try {
             TimeUnit.MILLISECONDS.sleep(200);

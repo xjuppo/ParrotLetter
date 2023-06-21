@@ -1,10 +1,12 @@
 package me.xjuppo.parrotletter.parrot.tasks;
 
 import me.xjuppo.parrotletter.ParrotConfigMessage;
+import me.xjuppo.parrotletter.ParrotLetter;
 import me.xjuppo.parrotletter.Utility.ParrotMessage;
 import me.xjuppo.parrotletter.parrot.ParrotCarrier;
 import me.xjuppo.parrotletter.parrot.ParrotState;
 import me.xjuppo.parrotletter.parrot.ParrotTask;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Parrot;
 
 public class WaitingTask extends ParrotTask {
@@ -13,9 +15,11 @@ public class WaitingTask extends ParrotTask {
     public ParrotState executeTask(ParrotCarrier parrotCarrier) {
         Parrot parrot = (Parrot) parrotCarrier.getEntity();
 
-        parrot.setSitting(true);
-        parrot.setAware(true);
-        parrot.setAI(false);
+        Bukkit.getScheduler().runTask(ParrotLetter.plugin, () -> {
+            parrot.setSitting(true);
+            parrot.setAware(true);
+            parrot.setAI(false);
+        });
 
         long endWait = System.currentTimeMillis() + 8000;
 

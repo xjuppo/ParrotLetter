@@ -10,10 +10,9 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.*;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.util.Vector;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.*;
-import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 
@@ -28,7 +27,9 @@ public class ParrotCarrier {
 
     public ParrotState currentState = ParrotState.FALLING;
     ParrotState previousState = null;
-    Thread parrotThread;
+    BukkitRunnable parrotTask;
+
+    ParrotCarrier parrotCarrier;
 
     public ItemStack toSend = null;
 
@@ -41,6 +42,7 @@ public class ParrotCarrier {
     public ParrotCarrier(Player player, Player receiver) {
         this.player = player;
         this.receiver = receiver;
+        this.parrotCarrier = this;
 
         if (parrots.keySet().contains(player)) {
             if (parrots.get(player).currentState != ParrotState.EXIT) {
@@ -82,16 +84,18 @@ public class ParrotCarrier {
     }
 
     public void startCycle() {
-        this.parrotThread = new Thread(() -> {
-            this.executeNextTask(this);
-        });
-        this.parrotThread.start();
-
+        this.parrotTask = new BukkitRunnable() {
+            @Override
+            public void run() {
+                executeNextTask(parrotCarrier);
+            }
+        };
+        this.parrotTask.runTaskAsynchronously(ParrotLetter.plugin);
     }
 
     public void cancelCycle() {
-        if (this.parrotThread.isAlive()) {
-            this.parrotThread.interrupt();
+        if (!parrotTask.isCancelled()) {
+            this.parrotTask.cancel();
         }
     }
 
