@@ -15,7 +15,7 @@ text:
   time_expired_message: "%p > Guess you don't have anything to deliver, I will be going, bye!"
 
   # The item to deliver is received by the parrot
-  item_got_message: "%p > Thanks, I will deliver this item right now"
+  item_got_message: "%p > Thanks, I will deliver these items right now"
 
   # The parrot starts delivering the item to the designated player
   delivery_start_message: "%p > Hi %r, I have something for you from %s"
@@ -27,11 +27,18 @@ text:
 
 parrot_names: [Joe, John, Jerome, Mike, Oliver]
 
-# If you want to add a cost for calling a parrot enable use_call_item and specificy an item
+# If you want to add a cost for calling a parrot enable use_call_item and specify an item
 
 call_item: minecraft:diamond
 call_item_amount: 1
 use_call_item: false
+
+# Time (in milliseconds) after parrots flies away if it didn't get any item
+fly_away_time: 10000
+
+# Parrot inventory size (Must be a multiple of 9 and from 9 to 54)
+# Accepted values = [9, 18, 27, 36, 45, 54]
+parrot_inventory_size: 9
 
 # Commands permissions:
 # parrotletter.* | Access to base command

@@ -9,6 +9,7 @@ import me.xjuppo.parrotletter.parrot.tasks.WaitingTask;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.*;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 
@@ -31,7 +32,9 @@ public class ParrotCarrier {
 
     ParrotCarrier parrotCarrier;
 
-    public ItemStack toSend = null;
+    public ItemStack[] toSend = {};
+
+    public Inventory parrotInventory;
 
     public static List<String> names = Arrays.asList("Jerome", "Mike", "Lucas");
 
@@ -161,5 +164,14 @@ public class ParrotCarrier {
 
     public String getParrotName() {
         return parrotName;
+    }
+
+    public boolean hasItemsInInventory() {
+        for (ItemStack itemStack : toSend) {
+            if (itemStack != null) {
+                return true;
+            }
+        }
+        return false;
     }
 }

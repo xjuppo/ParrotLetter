@@ -26,7 +26,7 @@ public class FallingTask extends ParrotTask {
 
         if (parrotCarrier.firstEnterState) {
             parrotCarrier.getPlayer().sendMessage(ParrotConfigMessage.getMessage(parrotCarrier, ParrotMessage.HELLO_MESSAGE));
-            parrotCarrier.getPlayer().sendTitle(parrotCarrier.getParrotName(), "Right click me with item in hand", 10, 30, 10);
+            parrotCarrier.getPlayer().sendTitle(parrotCarrier.getParrotName(), "Right click me", 10, 30, 10);
             parrot.playEffect(EntityEffect.ENTITY_POOF);
             parrotCarrier.getPlayer().playSound(parrot.getLocation(), Sound.BLOCK_NOTE_BLOCK_BELL, 1, 0.8f);
         }

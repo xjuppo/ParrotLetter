@@ -39,7 +39,7 @@ public class FlyingAwayTask extends ParrotTask {
         vector.setZ(Math.sin(randomFloat*2*Math.PI)*this.horizontalSpeed);
 
         BukkitTask task = Bukkit.getScheduler().runTaskTimer(ParrotLetter.plugin, () -> {
-            if (parrotCarrier.toSend == null) {
+            if (parrotCarrier.toSend.length == 0) {
                 parrot.setRotation(-parrotCarrier.getReceiver().getLocation().getYaw(), parrotCarrier.getReceiver().getLocation().getPitch());
             }
             else {
@@ -68,7 +68,7 @@ public class FlyingAwayTask extends ParrotTask {
             Bukkit.getLogger().log(Level.INFO, e.toString());
         }
 
-        if (parrotCarrier.toSend == null) {
+        if (parrotCarrier.toSend.length == 0) {
             return ParrotState.EXIT;
         }
         else {

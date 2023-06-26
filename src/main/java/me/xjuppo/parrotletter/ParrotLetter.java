@@ -5,6 +5,7 @@ import me.xjuppo.parrotletter.commands.BaseTabCompleter;
 import me.xjuppo.parrotletter.commands.CommandManager;
 import me.xjuppo.parrotletter.listeners.EntityListener;
 import me.xjuppo.parrotletter.listeners.TestListener;
+import me.xjuppo.parrotletter.parrot.ParrotCarrier;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -37,6 +38,8 @@ public final class ParrotLetter extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        // Plugin shutdown logic
+        ParrotCarrier.parrots.forEach((player, parrotCarrier) -> {
+            parrotCarrier.cancelCycle();
+        });
     }
 }

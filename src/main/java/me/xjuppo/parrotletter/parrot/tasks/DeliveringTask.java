@@ -11,6 +11,7 @@ import org.bukkit.EntityEffect;
 import org.bukkit.Location;
 import org.bukkit.Sound;
 import org.bukkit.entity.Parrot;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitTask;
 import org.bukkit.util.Vector;
 
@@ -62,8 +63,12 @@ public class DeliveringTask extends ParrotTask {
         }
 
         Bukkit.getScheduler().runTask(ParrotLetter.plugin, () -> {
-            parrot.getWorld().dropItemNaturally(parrot.getLocation(), parrotCarrier.toSend);
-            parrotCarrier.toSend = null;
+            for (ItemStack toSend : parrotCarrier.toSend) {
+                if (toSend != null) {
+                    parrot.getWorld().dropItemNaturally(parrot.getLocation(), toSend);
+                }
+            }
+            parrotCarrier.toSend = new ItemStack[]{};
         });
 
         try {
